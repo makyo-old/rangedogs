@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load rr_extras %}
+
+{% block title %}Gun Detail{% endblock %}
+
+{% block header %}Gun Detail: {{ gun|safe }}{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Owner</th>
+        <td>{{ gun.owner.get_profile|safe }}</td>
+    </tr>
+    <tr>
+        <th>Make</th>
+        <td>{{ gun.make }}</td>
+    </tr>
+    <tr>
+        <th>Model</th>
+        <td>{{ gun.model }}</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>{{ gun.get_type_display }}</td>
+    </tr>
+    {% ifequal gun.owner user %}
+    {% if gun.serial_number %}
+    <tr>
+        <th>Serial Number</th>
+        <td>{{ gun.serial_number }}</td>
+    </tr>
+    {% endif %}
+    {% endifequal %}
+    <tr>
+        <th>Caliber</th>
+        <td><a href="/caliber/{{ gun.caliber.slug }}/">{{ gun.caliber }}</a></td>
+    </tr>
+    {% if gun.barrel_length %}
+    <tr> 
+        <th>Barrel length</th>
+        <td>{{ gun.barrel_length }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.twist_rate %}
+    <tr>
+        <th>Twist rate</th>
+        <td>{{ gun.twist_rate }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.source %}
+    <tr>
+        <th>Source</th>
+        <td>{{ gun.source }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.rounds_fired %}
+    <tr>
+        <th>Rounds fired</th>
+        <td>{{ gun.rounds_fired }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.cost %}
+    <tr>
+        <th>Cost of purchase</th>
+        <td>{{ gun.cost }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.value %}
+    <tr>
+        <th>Estimated value to owner</th>
+        <td>{{ gun.value }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.accessories %}
+    <tr>
+        <th>Accessories</th>
+        <td>{{ gun.accessories|removetags:"div span table tr td th thead tbody tfoot style script body head title html embed object param form input textarea marquee meta option"|linebreaks|safe }}</td>
+    </tr>
+    {% endif %}
+    {% if gun.notes %}
+    <tr>
+        <th>Notes</th>
+        <td>{{ gun.notes|removetags:"div span table tr td th thead tbody tfoot style script body head title html embed object param form input textarea marquee meta option"|linebreaks|safe }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+{% ifnotequal gun.handload_set.count 0 %}
+<h2>Handloads for this gun:</h2>
+<ul>
+    {% for handloads in gun.handload_set %}
+    <li><a href="/handload/{{ handload.id }}/">Handload ID:{{ handload.id }}</a></li>
+    {% endfor %}
+</ul>
+{% endifnotequal %}
+
+<hr />
+{% recurse_comments "Gun" gun.id %}
+
+
+{% endblock %}

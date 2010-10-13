@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}New Report{% endblock %}
+
+{% block header %}Create a new range report{% endblock %}
+
+{% block content %}
+<div class="form">
+    <form method="post" action="">
+    	{{ form.as_p }}
+	<p><input type="submit" value="Submit" /> <input type="reset" value="Reset Form" />
+    </form>
+</div>
+{% endblock %}

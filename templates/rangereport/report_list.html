@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load rr_extras %}
+
+{% block title %}Range Reports{% endblock %}
+
+{% block header %}{% ifequal add_title "user" %}<a class="userlink" href="/user/{{ slug }}/"><img src="usericon.gif" alt="Rangedogs User" />{{ slug }}</a>'s{% else %}Recent{% endifequal %} Range Reports{% endblock %}
+
+{% block content %}
+{% for report in reports_list %}
+<div class="report_listing">
+    <span class="report_listing_title">{{ report.title }}</span> posted by <a class="userlink" href="/user/{{ report.owner.username }}/">{{ report.owner.username }}</a> on {{ report.ctime|date:"D d M Y" }}
+    <span class="report_listing_snippet">{{ report.body|truncatewords:100|striptags }}</span>
+    <span class="report_listing_participants">{{ report.participants|linkusers }}</span>
+    <span class="report_listing_guns">
+        {% for gun in report.guns %}
+        <a href="/gun/{{ gun.gun.id }}/">{{ gun.gun.owner.username }}'s {{ gun.gun.make }} {{ gun.gun.model }} in {{ gun.gun.caliber.name }}</a> 
+        {% endfor %}
+    </span>
+</div>
+{% endfor %}
+
+{% if is_paginated %}
+<div class="pagination">
+    <a href="/reports/?page=1">&lt;&lt;</a> |
+    {% if page_obj.has_previous %}
+    <a href="/reports/?page={{ page_obj.previous_page_number }}">&lt;</a> |
+    {% endif %}
+    {{ page_obj }}
+    {% if page_obj.has_next %}
+    | <a href="/reports/?page={{ page_obj.next_page_number }}">&gt;</a>
+    | <a href="/reports/?page=last">&gt;&gt;</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

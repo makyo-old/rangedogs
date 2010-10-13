@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}New Gun{% endblock %}
+
+{% block header %}Create a new gun{% endblock %}
+
+{% block content %}
+<div class="form">
+    <form method="post" action="">
+        <p>
+            {% if form.make.errors %}
+            <span class="error">{{ form.make.errors }}</span>
+            {% endif %}
+            <label for="id_make"><span class="required">*</span> The maker of the gun:</label><br />
+            {{ form.make }}
+        </p>
+        <p>
+            {% if form.model.errors %}
+            <span class="error">{{ form.model.errors }}</span>
+            {% endif %}
+            <label for="id_model"><span class="required">*</span> The model of the gun:</label><br />
+            {{ form.model }}
+        </p>
+        <p>
+            {% if form.type.errors %}
+            <span class="error">{{ form.type.errors }}</span>
+            {% endif %}
+            <label for="id_type"><span class="required">*</span> The type of gun:</label><br />
+            {{ form.type }}
+        </p>
+        <p>
+            {% if form.caliber.errors %}
+            <span class="error">{{ form.caliber.errors }}</span>
+            {% endif %}
+            <label for="id_caliber"><span class="required">*</span> The caliber of the gun</label><br />
+            {{ form.caliber }}
+        </p>
+        <p>
+            {% if form.serial_number.errors %}
+            <span class="error">{{ form.serial_number.errors }}</span>
+            {% endif %}
+            <label for="id_serial_number">The serial number of the gun<br />
+            (Note that only you will be able to see this information):</label><br />
+            {{ form.serial_number }}
+        </p>
+        <p>
+            {% if form.barrel_length.errors %}
+            <span class="error">{{ form.barrel_length.errors }}</span>
+            {% endif %}
+            <label for="id_barrel_length">The length of the barrel in inches:</label><br />
+            {{ form.barrel_length }}
+        </p>
+        <p>
+            {% if form.twist_rate.errors %}
+            <span class="error">{{ form.twist_rate.errors }}</span>
+            {% endif %}
+            <label for="id_twist_rate">The twist-rate of the rifling:</label><br />
+            {{ form.twist_rate }}
+        </p>
+        <p>
+            {% if form.source.errors %}
+            <span class="error">{{ form.source.errors }}</span>
+            {% endif %}
+            <label for="id_source">Where you purchased this gun:</label><br />
+            {{ form.source }}
+        </p>
+        <p>
+            {% if form.rounds_fired.errors %}
+            <span class="error">{{ form.rounds_fired.errors }}</span>
+            {% endif %}
+            <label for="id_rounds_fired">How many rounds have been fired through this gun<br />
+            (Note that, when you submit a range report, this will be automatically updated):</label><br />
+            {{ form.rounds_fired }}
+        </p>
+        <p>
+            {% if form.cost.errors %}
+            <span class="error">{{ form.cost.errors }}</span>
+            {% endif %}
+            <label for="id_cost">How much you paid for this gun (in USD):</label><br />
+            {{ form.cost }}
+        </p>
+        <p>
+            {% if form.value.errors %}
+            <span class="error">{{ form.value.errors }}</span>
+            {% endif %}
+            <label for="id_value">How much you value this gun to be worth (in USD):</label><br />
+            {{ form.value }}
+        </p>
+        <p>
+            {% if form.accessories.errors %}
+            <span class="error">{{ form.accessories.errors }}</span>
+            {% endif %}
+            <label for="id_accessories">Accessories for this gun</label><br />
+            {{ form.accessories }}
+        </p>
+        <p>
+            {% if form.notes.errors %}
+            <span class="error">{{ form.notes.errors }}</span>
+            {% endif %}
+            <label for="id_notes">Notes about this gun:</label><br />
+            {{ form.notes }}
+        </p>
+    	<p><input type="submit" value="Submit" /> <input type="reset" value="Reset Form" />
+    </form>
+</div>
+{% endblock %}

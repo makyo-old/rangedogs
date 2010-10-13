@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}{{ caliber.name }}{% endblock %}
+
+{% block header %}Caliber Profile: {{ caliber.name }}{% endblock %}
+
+{% block content %}
+
+<p><img src="mediaurl/icons/caliber-{{ caliber.type }}.gif" alt="{{ caliber.get_type_display }}" /> {{ caliber.get_type_display }}</p>
+
+<div class="text">
+    {{ caliber.notes }}
+</div>
+
+<h2>Reloading data</h2>
+<table class="caliber_table">
+    <tbody>
+        <tr>
+            <th>Projectile diameter</th>
+            <td>{{ caliber.bullet_dia }}"</td>
+        </tr>
+        <tr>
+            <th>Max case length</th>
+            <td>{{ caliber.max_case_length }}"</td>
+        </tr>
+        <tr>
+            <th>Case trim length</th>
+            <td>{{ caliber.case_trim_length }}"</td>
+        </tr>
+        <tr>
+            <th>Max overall length</th>
+            <td>{{ caliber.max_oal }}"</td>
+        </tr>
+        <tr>
+            <th>Minimum overal length</th>
+            <td>{{ caliber.min_oal }}"</td>
+        </tr>
+        <tr>
+            <th>Max pressure {% if caliber.pressure_in_CUP %}(CUP){% else %}(PSI){% endif %}</th>
+            <td>{{ caliber.max_pressure }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text">
+    {{ caliber.reloading_notes }}
+
+    <p><a href="/caliber/{{ caliber.slug }}/handloads/">See handloads for this round</a></p>
+    <p><a href="/caliber/{{ caliber.slug }}/guns/">See guns chambered in this round</a></p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Gun List{% endblock %}
+
+{% block header %}<a class="userlink" href="/user/{{ slug }}/"><img src="usericon.gif" alt="Rangedogs User" />{{ slug }}</a>'s Handloads{% endblock %}
+
+{%block content %}
+<ul class="gun_listing">
+{% for gun in guns %}
+    <li><a href="/gun/{{ gun.id }}/">{{ gun }}</a></li>
+{% endfor %}
+</ul>
+
+{% if is_paginated %}
+<div class="pagination">
+    <a href="/reports/?page=1">&lt;&lt;</a> |
+    {% if page_obj.has_previous %}
+    <a href="/reports/?page={{ page_obj.previous_page_number }}">&lt;</a> |
+    {% endif %}
+    {{ page_obj }}
+    {% if page_obj.has_next %}
+    | <a href="/reports/?page={{ page_obj.next_page_number }}">&gt;</a>
+    | <a href="/reports/?page=last">&gt;&gt;</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

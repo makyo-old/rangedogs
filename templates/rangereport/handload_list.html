@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Handloads{% endblock %}
+
+{% block header %}<a class="userlink" href="/user/{{ slug }}/"><img src="usericon.gif" alt="Rangedogs User" />{{ slug }}</a>'s Handloads{% endblock %}
+
+{% block content %}
+<ul class="handload_listing">
+{% for handload in handloads_list %}
+    <li>{{ handload }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
